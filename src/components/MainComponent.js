@@ -4,13 +4,15 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Header from "./HeaderComponent";
 import Home from "./HomeComponents";
 import Quiz from "./QuizComponent";
+import RenderCompleted from './CompletedComponent'
 
 class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
       questions: QUESTIONS,
-      id : 0
+      id : 0,
+      isCompleted : false,
     };
   }
 
@@ -28,6 +30,9 @@ class Main extends Component {
       console.log(this.state.id)
 
     }
+    else if (this.state.id === lastItem) {
+      this.setState({ isCompleted : true });
+    }
    
     
   }
@@ -44,7 +49,7 @@ class Main extends Component {
         const params = match.params.id;
       
         return(
-            <Quiz selected={ selected } total = { total } params={params} id={ this.state.id} onClick={ () => this.selectQuestion(total)}/>
+            <Quiz selected={ selected } total = { total } params={params} id={ this.state.id} isCompleted={this.state.isCompleted} onClick={ () => this.selectQuestion(total)}/>
         )
       }
       else{
@@ -67,6 +72,7 @@ class Main extends Component {
             path="/question/:id"
             component={SelectedQues}
           />
+          <Route path="/completed" component={RenderCompleted} />
             <Redirect to="/home" />
         </Switch>
       </div>

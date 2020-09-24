@@ -16,48 +16,63 @@ class Quiz extends Component {
   }
 
   render() {
-    const options = () => {
-      return (
-        <div>
-          <div className="row mt-5">
-            <div className="col-sm">
-              <div className="card questionCard">
-                <div className="card-body">
-                  <div className="card-title">Hello World</div>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm ">
-              <div className="card questionCard">
-                <div className="card-body">
-                  <div className="card-title">Hello World</div>
-                </div>
+    const routingSwitch = (total) => {
+      const isCompleted = this.props.isCompleted;
+      if (isCompleted) {
+        return (
+          <Link to="/completed">
+            <Button
+              id="nextQuestion"
+              onClick={() => this.props.onClick(total)}
+              color="success"
+            >
+              <span className="fa fa-forward fa-lg"></span> Go TO Result Page
+            </Button>
+          </Link>
+        );
+      } else {
+        return (
+          <Link to={`/question/${this.props.id}`}>
+            <Button
+              id="nextQuestion"
+              onClick={() => this.props.onClick(total)}
+              color="secondary"
+            >
+              <span className="fa fa-forward fa-lg"></span> Next Question
+            </Button>
+          </Link>
+        );
+      }
+    };
+
+    const options = (cleanedIncorrectAnswerData, cleanedCorrectAnswerData) => {
+      let newOps = cleanedIncorrectAnswerData;
+      console.log(newOps);
+      newOps.push(cleanedCorrectAnswerData);
+
+      let res = newOps.sort(function () {
+        return 0.5 - Math.random();
+      });
+      let randomArr = res.slice(newOps, 4);
+      const viewOps = randomArr.map((suffledOps, index) => {
+        console.log(suffledOps);
+        return (
+          <div key={index} className="col-sm-6 mt-5">
+            <div className="card questionCard">
+              <div className="card-body">
+                <div className="card-title"> {suffledOps} </div>
               </div>
             </div>
           </div>
-          <div className="row mt-5">
-            <div className="col-sm">
-              <div className="card questionCard">
-                <div className="card-body">
-                  <div className="card-title">Hello World</div>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm ">
-              <div className="card questionCard">
-                <div className="card-body">
-                  <div className="card-title">Hello World</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
+        );
+      });
+
+      return <div className="row">{viewOps}</div>;
     };
 
     const selectLevel = (selected) => {
       let difficulty = selected.difficulty;
-      console.log(difficulty);
+
       if (difficulty === "easy") {
         return (
           <div>
@@ -103,7 +118,6 @@ class Quiz extends Component {
         cleanedQuestion.push(splitted);
       });
       let strCleanedQues = cleanedQuestion.join(" ");
-      console.log(strCleanedQues);
 
       return strCleanedQues;
     };
@@ -118,7 +132,6 @@ class Quiz extends Component {
         cleanedCategory.push(splitted);
       });
       let strCleanedCat = cleanedCategory.join(" ");
-      console.log(strCleanedCat);
       return strCleanedCat;
     };
 
@@ -126,7 +139,6 @@ class Quiz extends Component {
       const re = /%\d\d/;
       let corrctAnswer = selected.correct_answer.split(re);
       let strCorrectAnswer = corrctAnswer.join(" ");
-      console.log(strCorrectAnswer);
       return strCorrectAnswer;
     };
 
@@ -136,18 +148,22 @@ class Quiz extends Component {
       const op2 = selected.incorrect_answers[1];
       const op3 = selected.incorrect_answers[2];
 
+      let opsArr = [];
       if (op1 && op2 && op3) {
         let incorrect = (option) => {
           let splitted = option.split(re);
           let strIncorrect = splitted.join(" ");
-          console.log(strIncorrect);
+          opsArr.push(strIncorrect);
         };
 
         incorrect(op1);
         incorrect(op2);
         incorrect(op3);
+
+        return opsArr;
       } else {
-        return <div></div>;
+        opsArr.push(op1);
+        return opsArr;
       }
     };
 
@@ -174,19 +190,11 @@ class Quiz extends Component {
             <div className="mt-5">
               <h5> {cleanedQuestionData(selected)} ? </h5>
             </div>
-            {options()}
-            <Link to={`/question/${this.props.id}`}>
-              <Button
-              id="nextQuestion"
-                onClick={() => this.props.onClick(total)}
-                color="secondary"
-              >
-                <span className="fa fa-forward fa-lg">
-
-                </span>{" "}
-                Next Question
-              </Button>
-            </Link>
+            {options(
+              cleanedIncorrectAnswerData(selected),
+              cleanedCorrectAnswerData(selected)
+            )}
+            {routingSwitch(total)}
           </Card>
         </div>
       );

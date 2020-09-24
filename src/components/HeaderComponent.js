@@ -13,7 +13,7 @@ function Header(props) {
         </div>
         <Nav navbar>
           <NavItem>
-            <NavLink className="nav-link" to="/home">
+            <NavLink className="nav-link active" to="/home">
               <span className="fa fa-home fa-lg"></span> Home
             </NavLink>
           </NavItem>
