@@ -1,6 +1,39 @@
 .card{
     width: 800px;
+    height: 500px;
     position: relative;
-    left: 120px;
-    /* border: none; */
+    left: 200px;
+   
+}
+
+.btnPosition {
+    position: relative;
+    top: 200px;
+    left: 470px;
+}
+
+.easy{
+    color: #a9a2a2;
+}
+.questionCard{
+    width: 200px;
+    height: 60px;
+    border-radius: 10px;
+    background-color: lightgray;
+}
+
+.row{
+    position: relative;
+    right: 200px;
+   
+}
+
+#questionCard{
+    border: none;
+}
+
+#nextQuestion{
+    position: relative;
+    top: 60px;
+    left: 210px;
 }
