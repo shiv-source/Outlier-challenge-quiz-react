@@ -47,7 +47,6 @@ class Quiz extends Component {
 
     const options = (cleanedIncorrectAnswerData, cleanedCorrectAnswerData) => {
       let newOps = cleanedIncorrectAnswerData;
-      console.log(newOps);
       newOps.push(cleanedCorrectAnswerData);
 
       let res = newOps.sort(function () {
@@ -55,7 +54,7 @@ class Quiz extends Component {
       });
       let randomArr = res.slice(newOps, 4);
       const viewOps = randomArr.map((suffledOps, index) => {
-        console.log(suffledOps);
+    
         return (
           <div key={index} className="col-sm-6 mt-5">
             <div className="card questionCard">
