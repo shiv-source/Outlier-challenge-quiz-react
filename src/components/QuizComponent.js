@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Progress } from 'reactstrap';
+
 import {
   Button,
   Card,
@@ -17,7 +19,7 @@ class Quiz extends Component {
       isSelected: false,
       isCorrect: null,
       isIncorrect: null,
-      ansArray: [],
+      totalCorrect: 0,
     };
   }
 
@@ -49,6 +51,16 @@ class Quiz extends Component {
   }
 
   render() {
+
+    const progressBar = () => {
+      const total = this.props.total;
+      const params = this.props.params;
+      const currentQuestNum = parseInt(params) + 1;
+      const val = (currentQuestNum / total )*100;
+      return val.toFixed();
+
+    }
+
     const incorrectRender = () => {
       const isIncorrect = this.state.isIncorrect;
       if (isIncorrect) {
@@ -263,7 +275,13 @@ class Quiz extends Component {
       );
     };
 
-    return <div className="container">{currentQuestion()}</div>;
+    return <div>
+      <div><Progress value={ progressBar()} color="secondary" > {progressBar ()} % </Progress></div>
+      <div  className="container">
+      {currentQuestion()}
+      </div>
+      
+      </div>;
   }
 }
 
