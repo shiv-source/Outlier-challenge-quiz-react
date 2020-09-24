@@ -34,6 +34,20 @@
 
 #nextQuestion{
     position: relative;
-    top: 35px;
+    top: 15px;
     left: 240px;
+}
+
+.correct{
+    color: green;
+    position: relative;
+    top: 10px;
+    margin-left: 32%;
+}
+
+.incorrect{
+    color: red;
+    position: relative;
+    top: 10px;
+    margin-left: 32%;
 }

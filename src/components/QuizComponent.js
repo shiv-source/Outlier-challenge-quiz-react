@@ -13,9 +13,68 @@ import {
 class Quiz extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isSelected: false,
+      isCorrect: null,
+      isIncorrect: null,
+      ansArray: [],
+    };
+  }
+
+  onSelectOps(suffledOps, correctAns) {
+    console.log("Correct one is ", correctAns);
+
+    let isSelected = this.state.isSelected;
+    if (!isSelected) {
+      console.log(suffledOps);
+      this.setState({ isSelected: true });
+      if (suffledOps === correctAns) {
+        this.setState({ isCorrect: true }, () => {
+          console.log(this.state.isCorrect);
+        });
+      } else if (suffledOps !== correctAns) {
+        this.setState({ isIncorrect: true });
+      } else {
+        this.setState({ isCorrect: false }, () => {
+          console.log(this.state.isCorrect);
+        });
+
+        this.setState({ isIncorrect: false }, () => {
+          console.log(this.state.isIncorrect);
+        });
+      }
+    } else {
+      return <div></div>;
+    }
   }
 
   render() {
+    const incorrectRender = () => {
+      const isIncorrect = this.state.isIncorrect;
+      if (isIncorrect) {
+        return (
+          <div className="incorrect">
+            <h3> Sorry! </h3>
+          </div>
+        );
+      } else {
+        return <div></div>;
+      }
+    };
+
+    const correctRender = () => {
+      const isCorrect = this.state.isCorrect;
+      if (isCorrect) {
+        return (
+          <div className="correct">
+            <h3> Correct! </h3>
+          </div>
+        );
+      } else {
+        return <div></div>;
+      }
+    };
+
     const routingSwitch = (total) => {
       const isCompleted = this.props.isCompleted;
       if (isCompleted) {
@@ -46,6 +105,7 @@ class Quiz extends Component {
     };
 
     const options = (cleanedIncorrectAnswerData, cleanedCorrectAnswerData) => {
+      const correctAns = cleanedCorrectAnswerData;
       let newOps = cleanedIncorrectAnswerData;
       newOps.push(cleanedCorrectAnswerData);
 
@@ -54,10 +114,12 @@ class Quiz extends Component {
       });
       let randomArr = res.slice(newOps, 4);
       const viewOps = randomArr.map((suffledOps, index) => {
-    
         return (
           <div key={index} className="col-sm-6 mt-5">
-            <div className="card questionCard">
+            <div
+              onClick={() => this.onSelectOps(suffledOps, correctAns)}
+              className="card questionCard"
+            >
               <div className="card-body">
                 <div className="card-title"> {suffledOps} </div>
               </div>
@@ -193,6 +255,8 @@ class Quiz extends Component {
               cleanedIncorrectAnswerData(selected),
               cleanedCorrectAnswerData(selected)
             )}
+            <div>{correctRender()}</div>
+            <div>{incorrectRender()} </div>
             {routingSwitch(total)}
           </Card>
         </div>

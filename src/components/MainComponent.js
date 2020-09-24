@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { QUESTIONS } from "../shared/questions";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, Router } from "react-router-dom";
 import Header from "./HeaderComponent";
 import Home from "./HomeComponents";
 import Quiz from "./QuizComponent";
@@ -13,6 +13,8 @@ class Main extends Component {
       questions: QUESTIONS,
       id: 0,
       isCompleted: false,
+      ansArray: [],
+   
     };
   }
 
@@ -36,7 +38,6 @@ class Main extends Component {
         )[0];
         const total = questions.length;
         const params = match.params.id;
-
         return (
           <Quiz
             selected={selected}
@@ -45,6 +46,8 @@ class Main extends Component {
             id={this.state.id}
             isCompleted={this.state.isCompleted}
             onClick={() => this.selectQuestion(total)}
+           
+          
           />
         );
       } else {
@@ -62,7 +65,8 @@ class Main extends Component {
               <Home
                 id={this.state.id}
                 onClick={() => this.selectQuestion(this.state.questions.length)}
-                total={this.state.questions.length}
+                total={this.state.questions.length}               
+                ansArray = { this.state.ansArray}
               />
             )}
           />
