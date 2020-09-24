@@ -5,31 +5,21 @@ import { Link } from "react-router-dom";
 class Home extends Component {
   constructor(props) {
     super(props);
+   
   }
 
   render() {
 
    
-
-    // const questions = this.props.questions.map( (question , index) => {
-    //     return(
-    //         <div key={index}>
-    //            <p> {question.question} </p>
-    //         </div>
-    //     )
-      
-       
-    // })
-
+    const total = this.props.total;
 
     return (
+     
       
       <div>
         <Container>
-          <Button color="success" size="lg" active>
-            Start Test
-          </Button>
-          {/* {questions} */}
+        <Link to={`/question/${this.props.id}`}><Button onClick={() =>this.props.onClick(total)} color="success" size="lg" active>   Start Test </Button>  </Link>
+         
         </Container>
       </div>
     );

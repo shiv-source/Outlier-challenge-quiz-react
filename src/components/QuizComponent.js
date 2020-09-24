@@ -5,28 +5,9 @@ import { Button , Card , CardBody , CardHeader , CardTitle , CardText  , CardSub
 class Quiz extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      id : 0,
-
-    }
+ 
   }
 
-
-  selectQuestion(total) {
-    let next = this.state.id +1;
-    let lastItem = (parseInt( total) -1)
-
-    if(next <= lastItem ) {
-      
-      this.setState({ id  : next });
-      console.log(lastItem);
-      console.log(this.state.id)
-
-    }
-   
-    
-  }
-  
 
   render() {
 
@@ -115,7 +96,7 @@ class Quiz extends Component {
             <CardSubtitle >{ selected.category} </CardSubtitle>
             <CardText > {  cleanedQuestionData(selected)} </CardText>
           </Card>
-          <Link to={`/question/${this.state.id}`}><Button onClick={() => this.selectQuestion(total)} color="primary"> Next Question </Button>  </Link>
+          <Link to={`/question/${this.props.id}`}><Button onClick={() =>this.props.onClick(total)} color="primary"> Next Question </Button>  </Link>
         </div>
       )
     
