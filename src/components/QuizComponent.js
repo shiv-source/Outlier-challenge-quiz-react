@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Progress } from 'reactstrap';
+import { Progress } from "reactstrap";
 
 import {
   Button,
@@ -19,7 +19,7 @@ class Quiz extends Component {
       isSelected: false,
       isCorrect: null,
       isIncorrect: null,
-      totalCorrect: 0,
+      selected : 0,
     };
   }
 
@@ -51,15 +51,13 @@ class Quiz extends Component {
   }
 
   render() {
-
     const progressBar = () => {
       const total = this.props.total;
       const params = this.props.params;
       const currentQuestNum = parseInt(params) + 1;
-      const val = (currentQuestNum / total )*100;
+      const val = (currentQuestNum / total) * 100;
       return val.toFixed();
-
-    }
+    };
 
     const incorrectRender = () => {
       const isIncorrect = this.state.isIncorrect;
@@ -129,7 +127,7 @@ class Quiz extends Component {
         return (
           <div key={index} className="col-sm-6 mt-5">
             <div
-              onClick={() => this.onSelectOps(suffledOps, correctAns)}
+              onClick={()=> this.onSelectOps(suffledOps, correctAns)}
               className="card questionCard"
             >
               <div className="card-body">
@@ -252,7 +250,7 @@ class Quiz extends Component {
 
       return (
         <div>
-          <Card id="questionCard" className="mt-5">
+          <Card id="questionCard" className="mt-3">
             <CardTitle>
               <h1>
                 Question {currentQuestNum} of {total}
@@ -275,13 +273,17 @@ class Quiz extends Component {
       );
     };
 
-    return <div>
-      <div><Progress value={ progressBar()} color="secondary" > {progressBar ()} % </Progress></div>
-      <div  className="container">
-      {currentQuestion()}
+    return (
+      <div>
+        <div>
+          <Progress value={progressBar()} color="secondary">
+            {" "}
+            {progressBar()} %{" "}
+          </Progress>
+        </div>
+        <div className="container">{currentQuestion()}</div>
       </div>
-      
-      </div>;
+    );
   }
 }
 
