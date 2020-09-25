@@ -1,3 +1,39 @@
+![alt text](https://raw.githubusercontent.com/shiv-source/Outlier-test-react/master/screenshot/Annotation%202020-09-25%20113055.png)
+
+
+
+
+![alt text](https://raw.githubusercontent.com/shiv-source/Outlier-test-react/master/screenshot/Annotation%202020-09-25%20113502.png)
+
+
+
+
+![alt text](https://raw.githubusercontent.com/shiv-source/Outlier-test-react/master/screenshot/Annotation%202020-09-25%20113124.png)
+
+
+
+![alt text](https://raw.githubusercontent.com/shiv-source/Outlier-test-react/master/screenshot/Annotation%202020-09-25%20113142.png)
+
+
+
+
+![alt text](https://raw.githubusercontent.com/shiv-source/Outlier-test-react/master/screenshot/Annotation%202020-09-25%20113202.png)
+
+
+
+![alt text](https://raw.githubusercontent.com/shiv-source/Outlier-test-react/master/screenshot/Annotation%202020-09-25%20113228.png)
+
+
+
+![alt text](https://raw.githubusercontent.com/shiv-source/Outlier-test-react/master/screenshot/Annotation%202020-09-25%20113252.png)
+
+
+
+![alt text](https://raw.githubusercontent.com/shiv-source/Outlier-test-react/master/screenshot/Annotation%202020-09-25%20113311.png)
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
