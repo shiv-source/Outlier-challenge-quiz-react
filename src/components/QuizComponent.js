@@ -70,6 +70,41 @@ class Quiz extends Component {
   }
 
   render() {
+    const correctProgressBar = () => {
+      let userResult = localStorage.getItem("userResult");
+      if (userResult) {
+        let parseData = JSON.parse(userResult);
+        let total = parseData.total;
+        let correct = parseData.correct;
+        const val = (correct / total) * 100;
+        const remainVal = 100 - val;
+        return (
+          <div>
+            <span id="correctPercentage">
+              <b>{val}% </b>{" "}
+            </span>
+            <span id="incorrectPercentage1">
+              <b>{remainVal}% </b>
+            </span>
+            <Progress multi>
+              <Progress bar color="success" value={val} />
+              <Progress bar color="danger" value={remainVal} />
+            </Progress>
+          </div>
+        );
+      } else {
+        let defaultVal = 100;
+        return (
+          <div>
+            <span id="incorrectPercentage">
+              <b>{defaultVal}% </b>
+            </span>
+            <Progress color="danger" value={defaultVal} />
+          </div>
+        );
+      }
+    };
+
     const progressBar = () => {
       const total = this.props.total;
       const params = this.props.params;
@@ -296,11 +331,13 @@ class Quiz extends Component {
       <div>
         <div>
           <Progress value={progressBar()} color="secondary">
-            {" "}
-            {progressBar()} %{" "}
+            {progressBar()} %
           </Progress>
         </div>
-        <div className="container">{currentQuestion()}</div>
+        <div className="container">
+          {currentQuestion()}
+          <div className="bottomProgressBar">{correctProgressBar()}</div>
+        </div>
       </div>
     );
   }
