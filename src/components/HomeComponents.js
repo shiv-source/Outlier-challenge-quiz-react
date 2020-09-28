@@ -3,15 +3,8 @@ import { Container, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 class Home extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.onResetResultOnStart = this.onResetResultOnStart.bind(this);
-  }
-
-
-  onResetResultOnStart(){
-    localStorage.removeItem('userResult');
-
   }
 
   render() {
@@ -26,7 +19,6 @@ class Home extends Component {
                 <Link to={`/question/${this.props.id}`}>
                   <Button
                     onClick={() => this.props.onClick(total)}
-                    onClick={this.onResetResultOnStart}
                     color="success"
                     size="lg"
                     active
