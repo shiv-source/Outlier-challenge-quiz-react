@@ -14,6 +14,7 @@ class Main extends Component {
       id: 0,
       isCompleted: false,
       ansArray: [],
+      marks : 0
    
     };
   }
@@ -46,6 +47,7 @@ class Main extends Component {
             id={this.state.id}
             isCompleted={this.state.isCompleted}
             onClick={() => this.selectQuestion(total)}
+            marks = {this.state.marks}
            
           
           />
@@ -71,7 +73,7 @@ class Main extends Component {
             )}
           />
           <Route exact path="/question/:id" component={SelectedQues} />
-          <Route path="/completed" component={RenderCompleted} />
+          <Route path="/result" component={RenderCompleted} />
           <Redirect to="/home" />
         </Switch>
       </div>

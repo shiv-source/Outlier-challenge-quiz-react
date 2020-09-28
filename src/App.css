@@ -6,11 +6,7 @@
    
 }
 
-.btnPosition {
-    position: relative;
-    top: 200px;
-    left: 470px;
-}
+
 
 .easy{
     color: #a9a2a2;
@@ -50,4 +46,30 @@
     position: relative;
     top: 10px;
     margin-left: 32%;
+}
+
+
+.result{
+    color: green;
+    margin-left: 35%;
+}
+
+
+
+.btnPosition{
+    position: relative;
+    top: 265px;
+    left: 125px;
+    margin-left: 105px;
+}
+
+.errorMsg{
+    text-align: center;
+    color: red;
+}
+
+#backToHmeBtn{
+    position: relative;
+    top: 15px;
+    left: 300px;
 }

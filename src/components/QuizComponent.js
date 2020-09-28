@@ -19,18 +19,37 @@ class Quiz extends Component {
       isSelected: false,
       isCorrect: null,
       isIncorrect: null,
-      selected : 0,
+      selected: 0,
     };
+    this.onSelectOps = this.onSelectOps.bind(this);
   }
 
   onSelectOps(suffledOps, correctAns) {
-    console.log("Correct one is ", correctAns);
-
     let isSelected = this.state.isSelected;
     if (!isSelected) {
       console.log(suffledOps);
       this.setState({ isSelected: true });
       if (suffledOps === correctAns) {
+        let userResult = localStorage.getItem("userResult");
+        if (!userResult) {
+          let initVal = 1;
+          const correctData = {
+            correct: initVal,
+            total: this.props.total,
+          };
+          localStorage.setItem("userResult", JSON.stringify(correctData));
+        } else {
+          let getVal = parseInt(JSON.parse(userResult).correct);
+          let newVal = getVal + 1;
+
+          const nextCorrectData = {
+            correct: newVal,
+            total: this.props.total,
+          };
+
+          localStorage.setItem("userResult", JSON.stringify(nextCorrectData));
+        }
+
         this.setState({ isCorrect: true }, () => {
           console.log(this.state.isCorrect);
         });
@@ -89,7 +108,7 @@ class Quiz extends Component {
       const isCompleted = this.props.isCompleted;
       if (isCompleted) {
         return (
-          <Link to="/completed">
+          <Link to="/result">
             <Button
               id="nextQuestion"
               onClick={() => this.props.onClick(total)}
@@ -127,7 +146,7 @@ class Quiz extends Component {
         return (
           <div key={index} className="col-sm-6 mt-5">
             <div
-              onClick={()=> this.onSelectOps(suffledOps, correctAns)}
+              onClick={() => this.onSelectOps(suffledOps, correctAns)}
               className="card questionCard"
             >
               <div className="card-body">
